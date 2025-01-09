@@ -1,0 +1,9 @@
+@use "dark";
+
+.html-grey {
+  filter: grayscale(100%);
+}
+
+.html-weakness {
+  filter: invert(80%);
+}
