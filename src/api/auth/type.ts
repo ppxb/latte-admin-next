@@ -39,6 +39,8 @@ export interface RouteItem {
   affix: boolean
 }
 
+export type LoginType = 'account' | 'phone' | 'email' | 'forget'
+
 export enum AuthTypeEnum {
   ACCOUNT = 'ACCOUNT',
   PHONE = 'PHONE',

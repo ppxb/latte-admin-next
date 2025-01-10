@@ -2,7 +2,9 @@
 import type { FormInstance, FormRules } from 'element-plus'
 
 import { getImageCaptcha } from '~/api'
+import { message } from '~/composables'
 import { useUserStore } from '~/store/modules/user'
+import { encryptByRsa } from '~/utils/crypto'
 
 const userStore = useUserStore()
 
@@ -13,8 +15,8 @@ const thirdPartys = [
 ]
 
 const form = reactive({
-  username: '',
-  password: '',
+  username: 'admin',
+  password: 'admin123',
   captcha: '',
   uuid: '',
 })
@@ -41,12 +43,31 @@ async function getCaptcha() {
   imageCaptcha.value = img
 }
 
+const loading = ref(false)
+
 async function handleSubmit() {
-  await formRef.value?.validate((valid, _) => {
-    if (valid) {
-      console.log(form)
-    }
-  })
+  await formRef.value?.validate()
+
+  try {
+    const encryptedPassword = encryptByRsa(form.password) || ''
+
+    loading.value = true
+    await userStore.accountLogin({
+      username: form.username,
+      password: encryptedPassword,
+      captcha: form.captcha,
+      uuid: form.uuid,
+    })
+    message({ msg: '登录成功' })
+  }
+  catch (error) {
+    console.log(error)
+    await getCaptcha()
+    formRef.value?.resetFields()
+  }
+  finally {
+    loading.value = false
+  }
 }
 
 onMounted(() => getCaptcha())
@@ -81,6 +102,7 @@ onMounted(() => getCaptcha())
               clearable
               placeholder="请输入验证码"
               class="w-3/4"
+              maxlength="4"
             />
             <img
               :src="imageCaptcha"
@@ -98,7 +120,7 @@ onMounted(() => getCaptcha())
           </el-button>
         </div>
         <el-form-item>
-          <el-button class="w-full" type="primary" @click="handleSubmit">
+          <el-button class="w-full" type="primary" :loading="loading" @click="handleSubmit">
             登录
           </el-button>
         </el-form-item>

@@ -5,7 +5,7 @@ type MessageType = typeof messageTypes[number]
 
 interface MessageProps {
   msg: string
-  type: MessageType
+  type?: MessageType
   options?: MessageOptions
 }
 
