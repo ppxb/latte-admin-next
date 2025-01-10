@@ -1,28 +1,22 @@
 <script setup lang="ts">
 import type { FormInstance, FormRules } from 'element-plus'
 
+import { getImageCaptcha } from '~/api'
 import { useUserStore } from '~/store/modules/user'
 
 const userStore = useUserStore()
 
 const thirdPartys = [
-  {
-    name: '微信登录',
-    icon: 'wechat',
-  },
-  {
-    name: '支付宝登录',
-    icon: 'alipay',
-  },
-  {
-    name: 'QQ登录',
-    icon: 'qq',
-  },
+  { name: '微信登录', icon: 'wechat' },
+  { name: '支付宝登录', icon: 'alipay' },
+  { name: 'QQ登录', icon: 'qq' },
 ]
 
 const form = reactive({
   username: '',
   password: '',
+  captcha: '',
+  uuid: '',
 })
 const formRef = ref<FormInstance>()
 const formRules = reactive<FormRules>({
@@ -32,9 +26,20 @@ const formRules = reactive<FormRules>({
   password: [
     { required: true, message: '请输入密码', trigger: 'trigger' },
   ],
+  captcha: [
+    { required: true, message: '请输入验证码', trigger: 'trigger' },
+  ],
 })
 
 const rememberAccount = ref(false)
+
+const imageCaptcha = ref('')
+
+async function getCaptcha() {
+  const { data: { uuid, img } } = await getImageCaptcha()
+  form.uuid = uuid
+  imageCaptcha.value = img
+}
 
 async function handleSubmit() {
   await formRef.value?.validate((valid, _) => {
@@ -43,6 +48,8 @@ async function handleSubmit() {
     }
   })
 }
+
+onMounted(() => getCaptcha())
 </script>
 
 <template>
@@ -66,6 +73,21 @@ async function handleSubmit() {
             clearable
             placeholder="请输入密码"
           />
+        </el-form-item>
+        <el-form-item prop="captcha">
+          <div class="flex items-center gap-4 w-full">
+            <el-input
+              v-model="form.captcha"
+              clearable
+              placeholder="请输入验证码"
+              class="w-3/4"
+            />
+            <img
+              :src="imageCaptcha"
+              class="cursor-pointer w-1/4"
+              @click="getCaptcha"
+            >
+          </div>
         </el-form-item>
         <div class="flex justify-between mb-4">
           <el-checkbox v-model="rememberAccount">

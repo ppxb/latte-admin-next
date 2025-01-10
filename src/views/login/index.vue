@@ -24,8 +24,13 @@ const loginComponents = {
 </script>
 
 <template>
-  <div class="min-h-screen flex">
-    <div class="relative hidden lg:flex lg:w-3/4 flex-col justify-center items-center login-bg">
+  <div class="relative min-h-screen flex">
+    <div class="absolute top-8 left-8 z-20 flex items-center gap-2">
+      <img src="/logo.svg" alt="logo" class="w-8 h-8">
+      <span class="text-gray-900 text-lg font-semibold">项目管理系统</span>
+    </div>
+
+    <div class="relative hidden lg:flex lg:w-2/3 flex-col justify-center items-center login-bg">
       <div class="flex flex-col justify-center items-center z-10">
         <h1 class="text-4xl font-bold mb-4">
           开箱即用的大中型后台管理系统
@@ -36,7 +41,11 @@ const loginComponents = {
       </div>
     </div>
 
-    <div class="relative w-full lg:w-1/4 flex items-center justify-center p-10">
+    <div class="relative w-full lg:w-1/3 flex items-center justify-center p-10">
+      <div class="absolute top-8 left-8 flex items-center gap-2 lg:hidden">
+        <img src="/logo.svg" alt="logo" class="w-8 h-8">
+        <span class="text-gray-900 text-lg font-semibold">项目管理系统</span>
+      </div>
       <div class="max-w-md w-full">
         <Motion :key="motionKey">
           <component :is="loginComponents[userStore.loginType]" />
