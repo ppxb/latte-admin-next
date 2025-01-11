@@ -27,7 +27,7 @@ const loginComponents = {
   <div class="relative min-h-screen flex">
     <div class="absolute top-8 left-8 z-20 flex items-center gap-2">
       <img src="/logo.svg" alt="logo" class="w-8 h-8">
-      <span class="text-gray-900 text-lg font-semibold">项目管理系统</span>
+      <span class="text-gray-900 text-lg font-semibold dark:text-white">项目管理系统</span>
     </div>
 
     <div class="relative hidden lg:flex lg:w-2/3 flex-col justify-center items-center login-bg">

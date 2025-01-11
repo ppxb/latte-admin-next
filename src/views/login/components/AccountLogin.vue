@@ -6,6 +6,8 @@ import { message } from '~/composables'
 import { useUserStore } from '~/store/modules/user'
 import { encryptByRsa } from '~/utils/crypto'
 
+const router = useRouter()
+const route = useRoute()
 const userStore = useUserStore()
 
 const thirdPartys = [
@@ -33,8 +35,8 @@ const formRules = reactive<FormRules>({
   ],
 })
 
+const loading = ref(false)
 const rememberAccount = ref(false)
-
 const imageCaptcha = ref('')
 
 async function getCaptcha() {
@@ -42,8 +44,6 @@ async function getCaptcha() {
   form.uuid = uuid
   imageCaptcha.value = img
 }
-
-const loading = ref(false)
 
 async function handleSubmit() {
   await formRef.value?.validate()
@@ -57,6 +57,13 @@ async function handleSubmit() {
       password: encryptedPassword,
       captcha: form.captcha,
       uuid: form.uuid,
+    })
+    const { redirect, ...othersQuery } = route.query
+    await router.push({
+      path: redirect as string || '/',
+      query: {
+        ...othersQuery,
+      },
     })
     message({ msg: '登录成功' })
   }
@@ -75,14 +82,20 @@ onMounted(() => getCaptcha())
 
 <template>
   <div class="flex flex-col gap-4">
-    <div class="text-4xl font-bold text-gray-900">
+    <div class="text-4xl font-bold ">
       欢迎回来 👏
     </div>
     <div class="text-sm text-muted-foreground">
       请输入您的账户信息以登录系统进行管理
     </div>
     <div class="flex flex-col">
-      <el-form ref="formRef" :model="form" :rules="formRules" size="large">
+      <el-form
+        ref="formRef"
+        :model="form"
+        :rules="formRules"
+        size="large"
+        @keyup.enter="handleSubmit"
+      >
         <el-form-item prop="username">
           <el-input v-model="form.username" clearable placeholder="请输入用户名" />
         </el-form-item>
@@ -120,7 +133,12 @@ onMounted(() => getCaptcha())
           </el-button>
         </div>
         <el-form-item>
-          <el-button class="w-full" type="primary" :loading="loading" @click="handleSubmit">
+          <el-button
+            class="w-full"
+            type="primary"
+            :loading="loading"
+            @click="handleSubmit"
+          >
             登录
           </el-button>
         </el-form-item>

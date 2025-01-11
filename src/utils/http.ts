@@ -66,7 +66,6 @@ http.interceptors.response.use(
     if (response.request.responseType === 'blob' || success) {
       return response
     }
-    console.log(msg)
     if (code === '401' && response.config.url !== '/auth/user/info') {
       messageBox(msg, {
         title: '提示',

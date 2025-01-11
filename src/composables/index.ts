@@ -1,4 +1,5 @@
 export * from './dark'
+export * from './fullscreen'
 export * from './message'
 export * from './message-box'
 export * from './notification'
