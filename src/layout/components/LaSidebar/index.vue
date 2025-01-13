@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { useAppStore } from '~/store/modules/app'
 import { useRouteStore } from '~/store/modules/route'
 
 defineOptions({
@@ -7,11 +8,12 @@ defineOptions({
 
 const route = useRoute()
 const routeStore = useRouteStore()
+const appStore = useAppStore()
 
-// 获取路由数据
 const routes = computed(() => routeStore.routes.filter(route => !route.meta?.hidden))
 
-// 当前激活的菜单
+const sidebarWidth = computed(() => appStore.isCollapse ? '64px' : '220px')
+
 const activeMenu = computed(() => {
   const { meta, path } = route
   if (meta?.activeMenu)
@@ -21,16 +23,20 @@ const activeMenu = computed(() => {
 </script>
 
 <template>
-  <div class="flex flex-col h-screen w-[220px] border-r border-gray-200 transition-[width] dark:border-gray-800">
+  <div
+    :style="{ width: sidebarWidth }"
+    class="flex flex-col h-screen border-r border-gray-200 transition-[width] dark:border-gray-800"
+  >
     <el-scrollbar wrap-class="scrollbar-wrapper">
       <el-menu
         router
         unique-opened
         mode="vertical"
         :default-active="activeMenu"
+        :collapse="appStore.isCollapse"
+        :collapse-transition="false"
       >
         <template v-for="r in routes" :key="r.path">
-          <!-- 没有子路由 -->
           <el-menu-item v-if="!r.children" :index="r.path">
             <el-icon v-if="r.meta?.icon">
               <IconifyIconOnline :icon="`ri:${r.meta?.icon}-fill`" />
@@ -40,9 +46,7 @@ const activeMenu = computed(() => {
             </template>
           </el-menu-item>
 
-          <!-- 有子路由 -->
           <template v-else>
-            <!-- 只有一个子路由时直接显示 -->
             <el-menu-item
               v-if="r.children.length === 1"
               :index="r.children[0].path"
@@ -55,7 +59,6 @@ const activeMenu = computed(() => {
               </template>
             </el-menu-item>
 
-            <!-- 多个子路由显示分组 -->
             <el-sub-menu
               v-else
               :index="r.path"
