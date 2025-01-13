@@ -20,6 +20,15 @@ const activeMenu = computed(() => currentRoute.meta?.activeMenu || currentRoute.
     :style="{ width: sidebarWidth }"
     class="flex flex-col h-screen border-r border-gray-200 transition-[width] dark:border-gray-800"
   >
+    <div class="h-12 flex items-center px-4">
+      <img src="/logo.svg" class="h-8">
+      <span
+        v-if="!appStore.isCollapse"
+        class="ml-2 text-lg font-semibold truncate"
+      >
+        项目管理系统
+      </span>
+    </div>
     <el-scrollbar wrap-class="scrollbar-wrapper">
       <el-menu
         router
