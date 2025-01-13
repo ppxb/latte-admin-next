@@ -6,20 +6,13 @@ defineOptions({
   name: 'LaSidebar',
 })
 
-const route = useRoute()
+const currentRoute = useRoute()
 const routeStore = useRouteStore()
 const appStore = useAppStore()
 
 const routes = computed(() => routeStore.routes.filter(route => !route.meta?.hidden))
-
 const sidebarWidth = computed(() => appStore.isCollapse ? '64px' : '220px')
-
-const activeMenu = computed(() => {
-  const { meta, path } = route
-  if (meta?.activeMenu)
-    return meta.activeMenu
-  return path
-})
+const activeMenu = computed(() => currentRoute.meta?.activeMenu || currentRoute.path)
 </script>
 
 <template>
@@ -36,42 +29,39 @@ const activeMenu = computed(() => {
         :collapse="appStore.isCollapse"
         :collapse-transition="false"
       >
-        <template v-for="r in routes" :key="r.path">
-          <el-menu-item v-if="!r.children" :index="r.path">
-            <el-icon v-if="r.meta?.icon">
-              <IconifyIconOnline :icon="`ri:${r.meta?.icon}-fill`" />
+        <template v-for="route in routes" :key="route.path">
+          <el-menu-item v-if="!route.children" :index="route.path">
+            <el-icon v-if="route.meta?.icon">
+              <IconifyIconOnline :icon="`ri:${route.meta?.icon}-fill`" />
             </el-icon>
             <template #title>
-              {{ r.meta?.title }}
+              {{ route.meta?.title }}
             </template>
           </el-menu-item>
 
           <template v-else>
             <el-menu-item
-              v-if="r.children.length === 1"
-              :index="r.children[0].path"
+              v-if="route.children.length === 1"
+              :index="route.children[0].path"
             >
-              <el-icon v-if="r.children[0].meta?.icon">
-                <IconifyIconOnline :icon="`ri:${r.children[0].meta?.icon}-fill`" />
+              <el-icon v-if="route.children[0].meta?.icon">
+                <IconifyIconOnline :icon="`ri:${route.children[0].meta?.icon}-fill`" />
               </el-icon>
               <template #title>
-                {{ r.children[0].meta?.title }}
+                {{ route.children[0].meta?.title }}
               </template>
             </el-menu-item>
 
-            <el-sub-menu
-              v-else
-              :index="r.path"
-            >
+            <el-sub-menu v-else :index="route.path">
               <template #title>
-                <el-icon v-if="r.meta?.icon">
-                  <IconifyIconOnline :icon="`ri:${r.meta?.icon}-fill`" />
+                <el-icon v-if="route.meta?.icon">
+                  <IconifyIconOnline :icon="`ri:${route.meta?.icon}-fill`" />
                 </el-icon>
-                <span>{{ r.meta?.title }}</span>
+                <span>{{ route.meta?.title }}</span>
               </template>
 
               <el-menu-item
-                v-for="child in r.children"
+                v-for="child in route.children"
                 :key="child.path"
                 :index="child.path"
               >
@@ -105,6 +95,14 @@ const activeMenu = computed(() => {
     &.is-active {
       color: var(--el-menu-active-color);
       background-color: var(--el-menu-hover-bg-color);
+    }
+  }
+
+  .el-sub-menu {
+    &.is-active {
+      > .el-sub-menu__title {
+        color: var(--el-menu-active-color);
+      }
     }
   }
 
