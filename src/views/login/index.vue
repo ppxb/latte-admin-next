@@ -4,7 +4,6 @@ import { useUserStore } from '~/store/modules/user'
 import AccountLogin from './components/AccountLogin.vue'
 import EmailLogin from './components/EmailLogin.vue'
 import ForgetPassword from './components/ForgetPassword.vue'
-import Motion from './components/Motion.vue'
 import PhoneLogin from './components/PhoneLogin.vue'
 
 defineOptions({
@@ -12,8 +11,6 @@ defineOptions({
 })
 
 const userStore = useUserStore()
-
-const motionKey = computed(() => `login-${userStore.loginType}`)
 
 const loginComponents = {
   account: AccountLogin,
@@ -25,7 +22,7 @@ const loginComponents = {
 
 <template>
   <div class="relative min-h-screen flex">
-    <div class="absolute top-8 left-8 z-20 flex items-center gap-2">
+    <div class="absolute top-8 z-20 flex items-center gap-2 lg:left-8 left-1/2 -translate-x-1/2 lg:translate-x-0">
       <img src="/logo.svg" alt="logo" class="w-8 h-8">
       <span class="text-gray-900 text-lg font-semibold dark:text-white">项目管理系统</span>
     </div>
@@ -42,14 +39,11 @@ const loginComponents = {
     </div>
 
     <div class="relative w-full lg:w-1/3 flex items-center justify-center p-10">
-      <div class="absolute top-8 left-8 flex items-center gap-2 lg:hidden">
-        <img src="/logo.svg" alt="logo" class="w-8 h-8">
-        <span class="text-gray-900 text-lg font-semibold">项目管理系统</span>
+      <div class="absolute top-8 right-8">
+        <ToggleDark />
       </div>
       <div class="max-w-md w-full">
-        <Motion :key="motionKey">
-          <component :is="loginComponents[userStore.loginType]" />
-        </Motion>
+        <component :is="loginComponents[userStore.loginType]" />
       </div>
       <footer class="absolute bottom-6 text-sm text-muted-foreground">
         Copyright © 2024. Built by ppxb
@@ -58,15 +52,16 @@ const loginComponents = {
   </div>
 </template>
 
-<style scoped lang="scss">
+<style scoped>
 .login-bg{
   position: relative;
   background: linear-gradient(154deg, #07070915 30%, hsl(212 100% 45% / 30%) 48%, #07070915 64%);
-  &::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    backdrop-filter: blur(100px);
-  }
+}
+
+.login-bg::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  backdrop-filter: blur(100px);
 }
 </style>

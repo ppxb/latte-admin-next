@@ -1,8 +1,6 @@
 <script setup lang="ts">
 import {
-  isDark,
   isFullscreen,
-  toggleDark,
   toggleFullscreen,
 } from '~/composables'
 import { useAppStore } from '~/store/modules/app'
@@ -19,10 +17,7 @@ const headerButtons = [
     icon: isFullscreen.value ? 'ri:fullscreen-exit-line' : 'ri:fullscreen-line',
     onClick: toggleFullscreen,
   },
-  {
-    icon: isDark.value ? 'ri:sun-line' : 'ri:moon-line',
-    onClick: toggleDark,
-  },
+
 ]
 </script>
 
@@ -40,6 +35,7 @@ const headerButtons = [
       >
         <IconifyIconOnline :icon="btn.icon" width="18" />
       </el-button>
+      <ToggleDark />
       <UserDropdown class="ml-3" />
     </div>
   </header>
