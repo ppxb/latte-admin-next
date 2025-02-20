@@ -11,7 +11,6 @@ defineOptions({
 })
 
 const appStore = useAppStore()
-const logo = computed(() => appStore.getLogo())
 
 const loginComponents = {
   'account': AccountLogin,
@@ -23,9 +22,9 @@ const loginComponents = {
 
 <template>
   <div class="relative min-h-screen flex">
-    <div class="lg:basis-1/3 flex flex-col items-center p-[50px]">
+    <div class="w-full lg:basis-1/3 flex flex-col items-center p-[50px]">
       <div class="w-full min-w-64 max-w-96">
-        <img :src="logo || '/logo.svg'" alt="logo" class="block max-h-10 my-8 self-start">
+        <img :src="appStore.getLogo() || '/logo.svg'" alt="logo" class="block max-h-10 my-8 self-start">
         <component :is="loginComponents[appStore.loginType]" />
       </div>
       <footer class="absolute bottom-6 text-foreground-muted">

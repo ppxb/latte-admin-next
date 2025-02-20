@@ -124,7 +124,7 @@ onMounted(getCaptcha)
             maxlength="4"
           >
             <template #suffix>
-              <img :src="imageCaptcha" class="cursor-pointer w-20 object-fill" @click="getCaptcha">
+              <img :src="imageCaptcha" class="cursor-pointer w-20 rounded-md object-fill" @click="getCaptcha">
             </template>
           </n-input>
         </n-form-item>
