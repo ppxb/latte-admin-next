@@ -1,0 +1,9 @@
+@import './n-button.css';
+@import './n-input.css';
+@import './n-form-item.css';
+@import "./n-message.css";
+
+:root {
+  --border-radius: 8px;
+  --bg-default-color: #fff;
+}

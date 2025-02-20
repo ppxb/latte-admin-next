@@ -1,0 +1,22 @@
+.n-form-item .n-form-item-feedback-wrapper:not(:empty) {
+  transform: translateY(-7px);
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+  padding-top: 0 !important;
+  z-index: 1;
+}
+
+.n-form-item .n-form-item-feedback-wrapper:not(:empty) .n-form-item-feedback {
+  font-size: 12px;
+  line-height: 1.2;
+  padding: 3px 12px;
+  border-bottom-left-radius: var(--border-radius);
+  border-bottom-right-radius: var(--border-radius);
+  background: color-mix(in srgb, currentColor 5%, var(--bg-default-color) 95%);
+  border: 1px solid currentColor;
+  border-top: 0;
+}
+
+.n-form-item .n-form-item-feedback-wrapper:not(:empty) .n-form-item-feedback {
+  color: var(--n-feedback-text-color-error);
+}
