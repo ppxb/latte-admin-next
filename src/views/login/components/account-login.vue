@@ -89,7 +89,7 @@ onMounted(getCaptcha)
     <div class="text-4xl font-bold ">
       欢迎回来 👏
     </div>
-    <div class="text-foreground-muted mb-8">
+    <div class="text-base text-foreground-muted mb-8">
       请输入您的账户信息以登录系统进行管理
     </div>
     <div class="flex flex-col gap-2">
