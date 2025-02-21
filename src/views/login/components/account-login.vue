@@ -3,10 +3,14 @@ import type { FormInst, FormRules } from 'naive-ui'
 import { useStorage } from '@vueuse/core'
 
 import { getImageCaptcha } from '~/apis'
-import { useAppStore } from '~/store'
-import { createFormValidator } from '~/utils/validator'
+import { useAppStore, useUserStore } from '~/store'
+import { encryptByRSA } from '~/utils/encrypt'
+import { createFormValidator } from '~/utils/validate'
 
+const router = useRouter()
+const route = useRoute()
 const appStore = useAppStore()
+const userStore = useUserStore()
 
 const loginConfig = useStorage('login-config', {
   username: 'admin',
@@ -42,10 +46,6 @@ const formRules = {
   },
 } as FormRules
 
-function onlyAllowNumber(value: string) {
-  return !value || /^\d+$/.test(value)
-}
-
 const loading = ref(false)
 const imageCaptcha = ref('')
 
@@ -59,15 +59,18 @@ async function handleLogin() {
   await formRef.value?.validate()
   try {
     loading.value = true
-    await new Promise((resolve) => {
-      setTimeout(() => {
-        loginConfig.value = {
-          username: form.username,
-          password: form.password,
-          rememberMe: true,
-        }
-        resolve(true)
-      }, 3000)
+
+    const encryptedPassword = encryptByRSA(form.password) || ''
+    await userStore.accountLogin({
+      username: form.username,
+      password: encryptedPassword,
+      captcha: form.captcha,
+      uuid: form.uuid,
+    })
+    const { redirect, ...rest } = route.query
+    await router.push({
+      path: redirect as string || '/',
+      query: { ...rest },
     })
     window.$message?.success('登录成功')
   }
@@ -97,6 +100,7 @@ onMounted(getCaptcha)
         ref="formRef"
         :model="form"
         :rules="formRules"
+        @keyup.enter="handleLogin"
       >
         <n-form-item label="用户名" path="username">
           <n-input
@@ -119,7 +123,6 @@ onMounted(getCaptcha)
           <n-input
             v-model:value="form.captcha"
             size="large"
-            :allow-input="onlyAllowNumber"
             placeholder="请输入验证码"
             maxlength="4"
           >

@@ -1,0 +1,3 @@
+<template>
+  mix layout
+</template>

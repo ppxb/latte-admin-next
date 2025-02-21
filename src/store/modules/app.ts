@@ -2,9 +2,28 @@ import { defineStore } from 'pinia'
 
 import { listSiteOptionDict } from '~/apis'
 
+const defaultSettings = {
+  theme: 'light',
+  themeColor: '#165DFF',
+  enableTab: true,
+  tab: 'card-gutter',
+  enableAnimate: false,
+  animate: 'zoom-fade',
+  menuCollapse: true,
+  menuAccordion: true,
+  menuDark: false,
+  copyrightDisplay: true,
+  layout: 'base',
+  enableColorWeaknessMode: false,
+  enableMourningMode: false,
+} as App.Settings
+
 function appStore() {
   const loginType = ref<App.LoginType>('account')
   const siteConfig = ref<App.SiteConfig>()
+  const settings = reactive<App.Settings>(defaultSettings)
+
+  const transitionName = computed(() => settings.enableAnimate ? settings.animate : '')
 
   const setLoginType = (type: App.LoginType) => {
     loginType.value = type
@@ -53,6 +72,9 @@ function appStore() {
 
   return {
     loginType,
+    ...toRefs(settings),
+    siteConfig,
+    transitionName,
     setLoginType,
     initSiteConfig,
     getLogo,
