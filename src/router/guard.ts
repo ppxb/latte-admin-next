@@ -1,18 +1,9 @@
 import type { NavigationGuardNext, RouteLocationNormalized, Router } from 'vue-router'
 import { useTitle } from '@vueuse/core'
-import NProgress from 'nprogress'
 
 import { useAppStore, useRouteStore, useUserStore } from '~/store'
 import { getToken } from '~/utils/auth'
 import { isHttp } from '~/utils/validate'
-
-NProgress.configure({
-  easing: 'ease',
-  showSpinner: false,
-  trickleSpeed: 200,
-  speed: 500,
-  minimum: 0.3,
-})
 
 const WHITE_LIST = ['/login', '/social/callback', '/pwdExpired']
 
@@ -26,7 +17,7 @@ let hasInitializedRoutes = false
 
 export function setupRouterGuard(router: Router) {
   router.beforeEach(async (to, _, next) => {
-    NProgress.start()
+    window.$loadingBar?.start()
 
     const updateDocumentTitle = () => {
       const appStore = useAppStore()
@@ -47,7 +38,7 @@ export function setupRouterGuard(router: Router) {
   })
 
   router.afterEach(() => {
-    NProgress.done()
+    window.$loadingBar?.finish()
   })
 }
 
