@@ -67,6 +67,7 @@ async function handleLogin() {
       captcha: form.captcha,
       uuid: form.uuid,
     })
+
     const { redirect, ...rest } = route.query
     await router.push({
       path: redirect as string || '/',
@@ -131,7 +132,14 @@ onMounted(getCaptcha)
             </template>
           </n-input>
         </n-form-item>
-        <n-button type="primary" size="large" block :loading="loading" @click="handleLogin">
+        <n-button
+          type="primary"
+          size="large"
+          block
+          :loading="loading"
+          :disabled="loading"
+          @click="handleLogin"
+        >
           登录
         </n-button>
       </n-form>

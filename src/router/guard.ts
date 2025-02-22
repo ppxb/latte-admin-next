@@ -43,21 +43,22 @@ export function setupRouterGuard(router: Router) {
 }
 
 async function resolveRoute(to: RouteLocationNormalized, next: NavigationGuardNext, router: Router) {
+  const token = getToken()
+
+  if (token && to.path === LOGIN_PATH) {
+    next(DEFAULT_PATH)
+    return
+  }
+
   if (WHITE_LIST.includes(to.path)) {
     next()
     return
   }
 
-  const token = getToken()
   if (!token) {
     next(LOGIN_PATH)
     return
   }
-
-  // if (token && to.path === LOGIN_PATH) {
-  //   next(DEFAULT_PATH)
-  //   return
-  // }
 
   if (!hasInitializedRoutes) {
     try {
@@ -82,7 +83,7 @@ async function resolveRoute(to: RouteLocationNormalized, next: NavigationGuardNe
     }
     catch (error) {
       console.error('Route generation error:', error)
-      next('/login')
+      next(LOGIN_PATH)
       return
     }
   }

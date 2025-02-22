@@ -8,6 +8,7 @@ import type {
 import axios from 'axios'
 import qs from 'query-string'
 
+import { useUserStore } from '~/store'
 import { getToken } from '~/utils/auth'
 
 interface CodeMessage {
