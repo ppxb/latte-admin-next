@@ -1,0 +1,7 @@
+.n-base-select-menu {
+  border-radius: var(--border-radius);
+}
+
+.n-base-select-menu .n-base-select-option::before {
+  border-radius: var(--border-radius);
+}

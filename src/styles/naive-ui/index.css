@@ -2,6 +2,8 @@
 @import './n-input.css';
 @import './n-form-item.css';
 @import "./n-message.css";
+@import './n-select.css';
+@import './n-dropdown.css';
 
 :root {
   --border-radius: 8px;

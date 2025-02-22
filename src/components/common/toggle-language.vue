@@ -26,7 +26,7 @@ function renderLabel(option: SelectOption) {
   const icon = LANGUAGE_CONFIG[option.value as Language].icon
 
   return h('div', {
-    class: 'flex items-center gap-2',
+    class: 'flex items-center gap-2 mr-4',
   }, [
     h('div', {
       class: `i-circle-flags:${icon} text-[14px]`,

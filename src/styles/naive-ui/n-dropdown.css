@@ -1,0 +1,7 @@
+.n-dropdown-menu {
+  border-radius: var(--border-radius);
+}
+
+.n-dropdown-menu .n-dropdown-option .n-dropdown-option-body::before {
+  border-radius: var(--border-radius);
+}
