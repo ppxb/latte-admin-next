@@ -56,7 +56,7 @@ async function resolveRoute(to: RouteLocationNormalized, next: NavigationGuardNe
   }
 
   if (!token) {
-    next(LOGIN_PATH)
+    next({ path: LOGIN_PATH, query: { redirect: to.fullPath } })
     return
   }
 

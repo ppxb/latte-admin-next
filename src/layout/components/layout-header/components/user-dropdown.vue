@@ -9,11 +9,15 @@ import {
   NAvatar,
   NText,
 } from 'naive-ui'
+
 import { useUserStore } from '~/store'
 
 defineOptions({
   name: 'UserDropdown',
 })
+
+const router = useRouter()
+const userStore = useUserStore()
 
 type AppDropdownOption = DropdownOption | DropdownGroupOption | DropdownDividerOption | DropdownRenderOption
 
@@ -43,10 +47,10 @@ function renderCustomHeader() {
       h(NAvatar, {
         round: true,
         style: 'margin-right: 12px;',
-        src: 'https://img.wxcha.com/m00/06/c2/8ca26e4e4eff9c8bafaf504ed114da07.jpg',
+        src: userStore.avatar,
       }),
       h('div', null, [
-        h('div', null, [h(NText, { depth: 2 }, { default: () => 'ppxb' })]),
+        h('div', null, [h(NText, { depth: 2 }, { default: () => userStore.nickname })]),
         h('div', { style: 'font-size: 12px;' }, [
           h(
             NText,
@@ -58,9 +62,6 @@ function renderCustomHeader() {
     ],
   )
 }
-
-const router = useRouter()
-const userStore = useUserStore()
 
 function logout() {
   window.$dialog?.warning({
@@ -87,6 +88,6 @@ function handleSelect(key: string | number) {
 
 <template>
   <n-dropdown trigger="hover" :options="options" @select="handleSelect">
-    <NAvatar class="w-8 h-8" round src="https://img.wxcha.com/m00/06/c2/8ca26e4e4eff9c8bafaf504ed114da07.jpg" />
+    <NAvatar class="w-8 h-8" round :src="userStore.avatar" />
   </n-dropdown>
 </template>

@@ -6,7 +6,7 @@ const appStore = useAppStore()
 
 <template>
   <n-layout-content>
-    <div class="flex flex-col min-h-[calc(100vh-80px)] px-10 overflow-hidden">
+    <div class="flex flex-col min-h-[calc(100vh-80px)] px-10 overflow-hidden bg-[var(--bg-body-color)] text-[var(--text-color)]">
       <router-view v-slot="{ Component, route }">
         <transition :name="appStore.transitionName" mode="out-in" appear>
           <component :is="Component" :key="route.path" class="flex-1" />
@@ -18,9 +18,3 @@ const appStore = useAppStore()
     </div>
   </n-layout-content>
 </template>
-
-<style scoped>
-.n-layout-content{
-  background-color: var(--bg-body-color);
-}
-</style>

@@ -1,9 +1,17 @@
 declare namespace App{
   type ThemeType = 'light' | 'dark'
+
   type LoginType = 'account' | 'phone' | 'email' | 'forget-pass'
+
   type LayoutType = 'base' | 'mix'
+
   type TabType = 'card' | 'card-gutter' | 'rounded'
+
   type AnimateType = 'zoom-fade' | 'slide-dynamic-origin' | 'fade-slide' | 'fade' | 'fade-bottom' | 'fade-scale'
+
+  type FormRules = import('naive-ui').FormRules
+
+  type FormItemRule = import('naive-ui').FormItemRule
 
   interface Settings {
     theme: ThemeType

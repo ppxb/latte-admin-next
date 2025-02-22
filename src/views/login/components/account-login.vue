@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import type { FormInst, FormRules } from 'naive-ui'
 import { useStorage } from '@vueuse/core'
 
 import { getImageCaptcha } from '~/apis'
+import { useForm } from '~/hooks/form'
 import { useAppStore, useUserStore } from '~/store'
 import { encryptByRSA } from '~/utils/encrypt'
 import { createFormValidator } from '~/utils/validate'
@@ -18,16 +18,24 @@ const loginConfig = useStorage('login-config', {
   rememberMe: true,
 })
 
-const initForm = {
+interface FormModel{
+  username: string
+  password: string
+  captcha: string
+  uuid: string
+  expired: boolean
+}
+
+const { formRef, validate } = useForm()
+
+const form = reactive<FormModel>({
   username: loginConfig.value.username,
   password: loginConfig.value.password,
   captcha: '',
   uuid: '',
   expired: false,
-}
+})
 
-const formRef = ref<FormInst | null>()
-const form = reactive(initForm)
 const formRules = {
   username: {
     required: true,
@@ -44,7 +52,7 @@ const formRules = {
     trigger: 'blur',
     validator: createFormValidator('请输入验证码'),
   },
-} as FormRules
+} as App.FormRules
 
 const loading = ref(false)
 const imageCaptcha = ref('')
@@ -56,7 +64,8 @@ async function getCaptcha() {
 }
 
 async function handleLogin() {
-  await formRef.value?.validate()
+  await validate()
+
   try {
     loading.value = true
 
@@ -78,7 +87,6 @@ async function handleLogin() {
   catch (error) {
     console.log(error)
     await getCaptcha()
-    Object.assign(form, initForm)
   }
   finally {
     loading.value = false

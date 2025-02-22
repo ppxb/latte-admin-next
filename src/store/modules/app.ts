@@ -50,6 +50,17 @@ function appStore() {
     }
   }
 
+  const toggleTheme = (dark: boolean) => {
+    if (dark) {
+      settings.theme = 'dark'
+      document.body.setAttribute('theme', 'dark')
+    }
+    else {
+      settings.theme = 'light'
+      document.body.removeAttribute('theme')
+    }
+  }
+
   const getFavicon = () => {
     return siteConfig.value?.SITE_FAVICON
   }
@@ -82,6 +93,7 @@ function appStore() {
     getTitle,
     getCopyright,
     getForRecord,
+    toggleTheme,
   }
 }
 

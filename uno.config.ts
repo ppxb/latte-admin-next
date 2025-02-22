@@ -1,5 +1,11 @@
-import { defineConfig, presetIcons, transformerDirectives, transformerVariantGroup } from 'unocss'
-import { presetWind3 } from 'unocss/preset-wind3'
+import {
+  defineConfig,
+  presetIcons,
+  presetWebFonts,
+  presetWind3,
+  transformerDirectives,
+  transformerVariantGroup,
+} from 'unocss'
 
 export default defineConfig({
   shortcuts: {
@@ -8,7 +14,20 @@ export default defineConfig({
   presets: [
     presetWind3(),
     presetIcons({
-      scale: 1.2,
+      collections: {
+        carbon: () => import('@iconify-json/carbon/icons.json').then(i => i.default),
+        ic: () => import('@iconify-json/ic/icons.json').then(i => i.default),
+      },
+    }),
+    presetWebFonts({
+      provider: 'bunny',
+      timeouts: {
+        warning: 7_000,
+        failure: 10_000,
+      },
+      fonts: {
+        mono: 'Inter',
+      },
     }),
   ],
   transformers: [

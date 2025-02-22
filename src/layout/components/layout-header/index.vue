@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import ToggleTheme from '~/components/common/toggle-theme.vue'
 import UserDropdown from './components/user-dropdown.vue'
 
 defineOptions({
@@ -11,6 +12,7 @@ defineOptions({
     <div>123</div>
     <div class="flex items-center bg-[var(--bg-sidebar-color)] border border-solid border-[var(--border-color)] rounded-[50px] p-[6px] gap-[14px] ">
       <div>123</div>
+      <ToggleTheme />
       <UserDropdown />
     </div>
   </n-layout-header>

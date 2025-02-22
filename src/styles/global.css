@@ -1,7 +1,4 @@
-@import url(https://fonts.bunny.net/css?family=inter:400,500,700,900);
 @import "./reset.css";
-
-
 
 html,
 body,
@@ -12,6 +9,8 @@ body,
 }
 
 body {
+  --text-color: rgb(51, 54, 57);
+
   --bg-body-color: rgb(245, 247, 249);
   --bg-sidebar-color: rgb(255, 255, 255);
 
@@ -22,9 +21,16 @@ body {
 }
 
 body[theme=dark] {
+  --text-color: rgb(255, 255, 255);
+
+
+  --bg-body-color: rgb(20, 22, 26);
   --bg-sidebar-color: rgb(29, 31, 37);
 
   --border-color: rgb(70, 71, 79);
+
+  --scrollbar-bg-color: rgba(29, 29, 29, 0.7);
+  --scrollbar-hover-bg-color: rgb(29, 29, 29);
 }
 
 body {
@@ -33,7 +39,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
-  font-family: Inter, Helvetica Neue, Helvetica, PingFang SC, Hiragino Sans GB, Microsoft YaHei, \5fae\8f6f\96c5\9ed1, Arial,
+  font-family: 'Inter', Helvetica Neue, Helvetica, PingFang SC, Hiragino Sans GB, Microsoft YaHei, \5fae\8f6f\96c5\9ed1, Arial,
     sans-serif;
 }
 
@@ -57,4 +63,20 @@ body {
   width: 6px;
   border-radius: 6px;
   background-color: var(--scrollbar-bg-color);
+}
+
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
+}
+
+::view-transition-old(root),
+.dark::view-transition-new(root) {
+  z-index: 1;
+}
+
+::view-transition-new(root),
+.dark::view-transition-old(root) {
+  z-index: 9999;
 }
