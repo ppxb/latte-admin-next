@@ -43,15 +43,15 @@ export function setupRouterGuard(router: Router) {
 }
 
 async function resolveRoute(to: RouteLocationNormalized, next: NavigationGuardNext, router: Router) {
+  if (WHITE_LIST.includes(to.path)) {
+    next()
+    return
+  }
+
   const token = getToken()
 
   if (token && to.path === LOGIN_PATH) {
     next(DEFAULT_PATH)
-    return
-  }
-
-  if (WHITE_LIST.includes(to.path)) {
-    next()
     return
   }
 

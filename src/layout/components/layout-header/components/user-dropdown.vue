@@ -1,14 +1,5 @@
 <script setup lang="ts">
-import type {
-  DropdownDividerOption,
-  DropdownGroupOption,
-  DropdownOption,
-  DropdownRenderOption,
-} from 'naive-ui'
-import {
-  NAvatar,
-  NText,
-} from 'naive-ui'
+import { NAvatar, NText } from 'naive-ui'
 
 import { useUserStore } from '~/store'
 
@@ -18,8 +9,6 @@ defineOptions({
 
 const router = useRouter()
 const userStore = useUserStore()
-
-type AppDropdownOption = DropdownOption | DropdownGroupOption | DropdownDividerOption | DropdownRenderOption
 
 const options = [
   {
@@ -35,7 +24,7 @@ const options = [
     label: '退出登录',
     key: 'logout',
   },
-] as AppDropdownOption[]
+] as App.AppDropdownOption[]
 
 function renderCustomHeader() {
   return h(

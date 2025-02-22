@@ -45,8 +45,7 @@ function handleError(msg: string) {
       duration: 3 * 1000,
     })
   }
-  return window.$message?.error(msg || '服务器端错误', { duration: 3 * 1000 },
-  )
+  return window.$message?.error(msg || '服务器端错误', { duration: 3 * 1000 })
 }
 
 http.interceptors.request.use(

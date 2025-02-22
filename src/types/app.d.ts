@@ -13,6 +13,11 @@ declare namespace App{
 
   type FormItemRule = import('naive-ui').FormItemRule
 
+  type AppDropdownOption = import('naive-ui').DropdownOption
+    | import('naive-ui').DropdownGroupOption
+    | import('naive-ui').DropdownDividerOption
+    | import('naive-ui').DropdownRenderOption
+
   interface Settings {
     theme: ThemeType
     themeColor: string

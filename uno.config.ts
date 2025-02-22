@@ -17,6 +17,8 @@ export default defineConfig({
       collections: {
         carbon: () => import('@iconify-json/carbon/icons.json').then(i => i.default),
         ic: () => import('@iconify-json/ic/icons.json').then(i => i.default),
+        lucide: () => import('@iconify-json/lucide/icons.json').then(i => i.default),
+        flags: () => import('@iconify-json/circle-flags/icons.json').then(i => i.default),
       },
     }),
     presetWebFonts({

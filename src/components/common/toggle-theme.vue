@@ -9,8 +9,6 @@ defineOptions({
 
 const appStore = useAppStore()
 
-const isHovered = ref(false)
-
 const isDark = useDark({
   onChanged(dark: boolean) {
     document.documentElement.setAttribute('class', dark ? 'dark' : 'light')
@@ -61,10 +59,8 @@ function handleToggleTheme(event?: MouseEvent) {
   <div
     class="text-5 cursor-pointer text-[var(--text-color)]"
     :class="[
-      appStore.theme === 'light' ? (isHovered ? 'i-ic:baseline-dark-mode' : 'i-ic:outline-dark-mode') : (isHovered ? 'i-ic:baseline-light-mode' : 'i-ic:outline-light-mode'),
+      appStore.theme === 'light' ? 'i-lucide:moon' : 'i-lucide:sun',
     ]"
-    @mouseover="isHovered = true"
-    @mouseleave="isHovered = false"
     @click="handleToggleTheme"
   />
 </template>
