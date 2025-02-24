@@ -3,6 +3,7 @@ import PiniaPluginPersistedstate from 'pinia-plugin-persistedstate'
 
 export * from './modules/app'
 export * from './modules/route'
+export * from './modules/theme'
 export * from './modules/user'
 
 const store = createPinia()

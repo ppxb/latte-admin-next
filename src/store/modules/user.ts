@@ -10,6 +10,7 @@ import {
 } from '~/apis'
 import { AuthTypeEnum } from '~/constants'
 import { resetRouter } from '~/router'
+import { resetHasInitializedRoutes } from '~/router/guard'
 import { clearToken, getToken, setToken } from '~/utils/auth'
 
 const defaultUserInfo: Api.UserInfo = {
@@ -48,6 +49,7 @@ function userStore() {
 
   const resetToken = () => {
     token.value = ''
+    resetHasInitializedRoutes()
     clearToken()
   }
 

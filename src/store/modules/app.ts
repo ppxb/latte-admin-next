@@ -9,7 +9,7 @@ const defaultSettings = {
   tab: 'card-gutter',
   enableAnimate: false,
   animate: 'zoom-fade',
-  menuCollapse: true,
+  menuCollapse: false,
   menuAccordion: true,
   menuDark: false,
   copyrightDisplay: true,

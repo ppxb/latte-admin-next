@@ -16,19 +16,19 @@ export const systemRoutes: RouteRecordRaw[] = [
     name: 'Dashboard',
     component: Layout,
     redirect: '/dashboard/workplace',
-    meta: { title: '仪表盘', icon: 'dashboard', hidden: false },
+    meta: { title: '仪表盘', icon: 'carbon:Dashboard', hidden: false },
     children: [
       {
         path: '/dashboard/workplace',
         name: 'Workplace',
         component: () => import('~/views/dashboard/workplace/index.vue'),
-        meta: { title: '工作台', icon: 'desktop', hidden: false, affix: true },
+        meta: { title: '工作台', icon: 'carbon:DataTable', hidden: false, affix: true },
       },
       {
         path: '/dashboard/analysis',
         name: 'Analysis',
         component: () => import('~/views/dashboard/analysis/index.vue'),
-        meta: { title: '分析页', icon: 'insert-chart', hidden: false },
+        meta: { title: '分析页', icon: 'carbon:ChartLineData', hidden: false },
       },
     ],
   },
@@ -61,21 +61,21 @@ export const systemRoutes: RouteRecordRaw[] = [
     path: '/about',
     name: 'About',
     component: Layout,
-    meta: { title: '关于项目', icon: 'apps', hidden: false, sort: 999 },
+    meta: { title: '关于项目', icon: 'carbon:Notebook', hidden: false, sort: 999 },
     children: [
       {
         path: 'https://github.com/ppxb/latte-starter',
-        meta: { title: 'Latte Starter', icon: 'github', hidden: false },
+        meta: { title: 'Latte Starter', icon: 'carbon:LogoGithub', hidden: false },
         redirect: '',
       },
       {
         path: 'https://github.com/ppxb/latte-admin',
-        meta: { title: 'Latte Admin', icon: 'github', hidden: false },
+        meta: { title: 'Latte Admin', icon: 'carbon:LogoGithub', hidden: false },
         redirect: '',
       },
       {
         path: 'https://github.com/ppxb/latte-admin-ui',
-        meta: { title: 'Latte Admin UI', icon: 'github', hidden: false },
+        meta: { title: 'Latte Admin UI', icon: 'carbon:LogoGithub', hidden: false },
         redirect: '',
       },
     ],

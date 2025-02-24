@@ -10,11 +10,15 @@ body,
 
 body {
   --text-color: rgb(51, 54, 57);
+  --icon-color: rgba(0, 0, 0, .3);
 
   --bg-body-color: rgb(245, 247, 249);
   --bg-sidebar-color: rgb(255, 255, 255);
 
   --border-color: rgb(226, 230, 233);
+  --dash-width: 8px;
+  --dash-height: 2px;
+  --dash-offset: 29px;
 
   --scrollbar-bg-color: rgba(229, 230, 235, .7);
   --scrollbar-hover-bg-color: rgb(229, 230, 235);
@@ -22,6 +26,7 @@ body {
 
 body[theme=dark] {
   --text-color: rgb(255, 255, 255);
+  --icon-color: rgba(255, 255, 255, .7);
 
 
   --bg-body-color: rgb(20, 22, 26);
@@ -29,8 +34,8 @@ body[theme=dark] {
 
   --border-color: rgb(70, 71, 79);
 
-  --scrollbar-bg-color: rgba(29, 29, 29, 0.7);
-  --scrollbar-hover-bg-color: rgb(29, 29, 29);
+  --scrollbar-bg-color: rgba(33, 33, 33, 0.7);
+  --scrollbar-hover-bg-color: rgb(33, 33, 33, 0.8);
 }
 
 body {

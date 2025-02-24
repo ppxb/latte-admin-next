@@ -4,6 +4,7 @@
 @import "./n-message.css";
 @import './n-select.css';
 @import './n-dropdown.css';
+@import './n-menu.css';
 
 :root {
   --border-radius: 8px;

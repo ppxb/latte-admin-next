@@ -90,3 +90,7 @@ async function resolveRoute(to: RouteLocationNormalized, next: NavigationGuardNe
 
   next()
 }
+
+export function resetHasInitializedRoutes() {
+  hasInitializedRoutes = false
+}

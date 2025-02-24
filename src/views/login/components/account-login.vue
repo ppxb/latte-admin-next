@@ -2,7 +2,7 @@
 import { useStorage } from '@vueuse/core'
 
 import { getImageCaptcha } from '~/apis'
-import { useForm } from '~/hooks/form'
+import { useForm } from '~/hooks/use-form'
 import { useAppStore, useUserStore } from '~/store'
 import { encryptByRSA } from '~/utils/encrypt'
 import { createFormValidator } from '~/utils/validate'

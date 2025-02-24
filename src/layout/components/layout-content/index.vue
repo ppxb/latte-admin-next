@@ -2,11 +2,16 @@
 import { useAppStore } from '~/store'
 
 const appStore = useAppStore()
+
+const isCollapsed = computed(() => appStore.menuCollapse)
 </script>
 
 <template>
   <n-layout-content>
-    <div class="flex flex-col min-h-[calc(100vh-80px)] px-10 overflow-hidden bg-[var(--bg-body-color)] text-[var(--text-color)]">
+    <div
+      class="flex flex-col min-h-[calc(100vh-80px)] pr-10 overflow-hidden bg-[var(--bg-body-color)] text-[var(--text-color)]"
+      :class="isCollapsed ? 'pl-[64px]' : 'pl-[340px]'"
+    >
       <router-view v-slot="{ Component, route }">
         <transition :name="appStore.transitionName" mode="out-in" appear>
           <component :is="Component" :key="route.path" class="flex-1" />
