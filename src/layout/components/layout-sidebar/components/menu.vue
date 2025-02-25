@@ -62,12 +62,15 @@ function handleMenuClick(key: string) {
 </script>
 
 <template>
-  <n-scrollbar class="px-2 max-h-[calc(100vh-80px)]">
+  <n-scrollbar
+    class="max-h-[calc(100vh-80px)] transition-all"
+    :class="appStore.menuCollapse ? '' : 'p-2'"
+  >
     <n-menu
-      v-model:value="selectedKeyRef"
+      :value="selectedKeyRef"
       :collapsed="!isDesktop ? false : appStore.menuCollapse"
       :collapsed-width="64"
-      :collapsed-icon-size="22"
+      :collapsed-icon-size="24"
       :root-indent="18"
       :options="generateOptions()"
       accordion

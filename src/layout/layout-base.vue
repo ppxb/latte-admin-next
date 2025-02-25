@@ -19,9 +19,3 @@ defineOptions({
     </n-layout>
   </n-layout>
 </template>
-
-<style scoped>
-.n-layout-sider {
-  background: rgba(128, 128, 128, 0.3);
-}
-</style>
