@@ -77,6 +77,6 @@ function handleSelect(key: string | number) {
 
 <template>
   <n-dropdown trigger="hover" :options="options" @select="handleSelect">
-    <NAvatar class="w-8 h-8" round :src="userStore.avatar" />
+    <NAvatar class="w-8 h-8 cursor-pointer" round :src="userStore.avatar" />
   </n-dropdown>
 </template>
