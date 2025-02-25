@@ -9,6 +9,7 @@ body,
 }
 
 body {
+  --white-color: #fff;
   --text-color: rgb(51, 54, 57);
   --icon-color: rgba(0, 0, 0, .3);
 
@@ -22,6 +23,8 @@ body {
 
   --scrollbar-bg-color: rgba(229, 230, 235, .7);
   --scrollbar-hover-bg-color: rgb(229, 230, 235);
+
+  --menu-item-hover-bg-color: rgba(221, 224, 225, 0.5);
 }
 
 body[theme=dark] {
@@ -36,6 +39,8 @@ body[theme=dark] {
 
   --scrollbar-bg-color: rgba(33, 33, 33, 0.7);
   --scrollbar-hover-bg-color: rgb(33, 33, 33, 0.8);
+
+  --menu-item-hover-bg-color: rgba(59, 61, 68, 0.5);
 }
 
 body {

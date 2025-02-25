@@ -23,7 +23,6 @@ function handleMenuCollapse() {
       </div>
     </div>
     <div class="flex items-center bg-[var(--bg-sidebar-color)] border border-solid border-[var(--border-color)] rounded-[50px] p-[6px] gap-[14px] ">
-      <div>123</div>
       <ToggleLanguage />
       <Fullscreen />
       <ToggleTheme />

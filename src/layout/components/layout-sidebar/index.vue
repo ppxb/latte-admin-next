@@ -25,7 +25,7 @@ const isCollapse = computed(() => appStore.menuCollapse)
       :collapsed-width="64"
       :collapsed="isCollapse"
       :width="300"
-      content-class="bg-[var(--bg-sidebar-color)] h-screen"
+      content-class="bg-[var(--bg-sidebar-color)] h-screen text-[var(--text-color)]"
     >
       <Logo />
       <LayoutSidebarMenu />

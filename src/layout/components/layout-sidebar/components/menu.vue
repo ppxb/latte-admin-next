@@ -64,9 +64,10 @@ function handleMenuClick(key: string) {
 <template>
   <n-scrollbar
     class="max-h-[calc(100vh-80px)] transition-all"
-    :class="appStore.menuCollapse ? '' : 'p-2'"
+    :class="appStore.menuCollapse ? '' : 'px-2'"
   >
     <n-menu
+      class="text-[var(--text-color)]"
       :value="selectedKeyRef"
       :collapsed="!isDesktop ? false : appStore.menuCollapse"
       :collapsed-width="64"

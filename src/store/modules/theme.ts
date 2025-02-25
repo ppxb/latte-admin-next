@@ -4,7 +4,7 @@ import { defineStore } from 'pinia'
 function themeStore() {
   const theme = reactive<GlobalThemeOverrides>({
     common: {
-      primaryColor: '#00b37a',
+      primaryColor: '#00e099',
     },
     Menu: {
       itemColorHover: 'rgba(221, 224, 225, 0.5)',
