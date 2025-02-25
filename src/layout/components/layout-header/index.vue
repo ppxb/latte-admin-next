@@ -1,8 +1,10 @@
 <script setup lang="ts">
 import ToggleTheme from '~/components/common/toggle-theme.vue'
 import { useAppStore } from '~/store'
+
 import Fullscreen from './components/fullscreen.vue'
 import UserDropdown from './components/user-dropdown.vue'
+import Search from './components/search.vue'
 
 defineOptions({
   name: 'LayoutHeader',
@@ -23,6 +25,7 @@ function handleMenuCollapse() {
       </div>
     </div>
     <div class="flex items-center bg-[var(--bg-sidebar-color)] border border-solid border-[var(--border-color)] rounded-[50px] p-[6px] gap-[14px] ">
+      <Search />
       <ToggleLanguage />
       <Fullscreen />
       <ToggleTheme />
