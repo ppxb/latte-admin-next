@@ -43,7 +43,7 @@ function handleLanguageChange() {
 <template>
   <n-popselect
     v-model:value="selectedLanguage"
-    trigger="hover"
+    trigger="click"
     :options="options"
     :render-label="renderLabel"
     @update:value="handleLanguageChange"
