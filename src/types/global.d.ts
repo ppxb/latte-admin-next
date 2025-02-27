@@ -1,4 +1,16 @@
 declare global{
+  declare namespace NTheme{
+    type ColorType = 'primary' | 'info' | 'success' | 'warning' | 'error'
+    type ColorTypeCase = 'Primary' | 'Info' | 'Success' | 'Warning' | 'Error'
+    type ColorScene = '' | 'suppl' | 'hover' | 'pressed'
+    type ColorSceneCase = '' | 'Suppl' | 'Hover' | 'Pressed'
+    type ButtonColorScene = '' | 'hover' | 'pressed' | 'focus' | 'disabled'
+    type ButtonColorSceneCase = '' | 'Hover' | 'Pressed' | 'Focus' | 'Disabled'
+    type Config = {
+      [key in NTheme.ColorType]: string
+    }
+  }
+
   export interface Window {
     $loadingBar?: import('naive-ui').LoadingBarProviderInst
     $dialog?: import('naive-ui').DialogProviderInst
