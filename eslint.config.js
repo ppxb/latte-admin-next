@@ -9,5 +9,6 @@ export default antfu({
     'regexp/no-unused-capturing-group': 'off',
     'style/arrow-parens': 'off',
     'style/space-before-blocks': 'off',
+    'ts/no-use-before-define': 'off',
   },
 })

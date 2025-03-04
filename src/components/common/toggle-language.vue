@@ -1,5 +1,8 @@
-<script setup lang="ts">
+<script setup lang="tsx">
 import type { SelectOption } from 'naive-ui'
+import { NIcon } from 'naive-ui'
+
+import SvgIcon from '~/components/common/svg-icon.vue'
 
 defineOptions({
   name: 'ToggleLanguage',
@@ -12,11 +15,11 @@ const selectedLanguage = ref<Language>('zh-cn')
 const LANGUAGE_CONFIG = {
   'zh-cn': {
     label: '中文',
-    icon: 'cn',
+    icon: 'circle-flags:cn',
   },
   'en': {
     label: '英语',
-    icon: 'en',
+    icon: 'circle-flags:en',
   },
 } as const
 
@@ -25,14 +28,14 @@ const options: SelectOption[] = Object.entries(LANGUAGE_CONFIG).map(([value, { l
 function renderLabel(option: SelectOption) {
   const icon = LANGUAGE_CONFIG[option.value as Language].icon
 
-  return h('div', {
-    class: 'flex items-center gap-2 mr-4',
-  }, [
-    h('div', {
-      class: `i-circle-flags:${icon} text-[14px]`,
-    }),
-    option.label as string,
-  ])
+  return (
+    <div class="flex items-center gap-2 mr-4">
+      <NIcon size={14}>
+        <SvgIcon icon={icon} />
+      </NIcon>
+      <span>{option.label}</span>
+    </div>
+  )
 }
 
 function handleLanguageChange() {
@@ -48,6 +51,8 @@ function handleLanguageChange() {
     :render-label="renderLabel"
     @update:value="handleLanguageChange"
   >
-    <div class="i-lucide:languages text-5 cursor-pointer text-[var(--text-color)]" />
+    <NIcon :size="19" class="cursor-pointer">
+      <SvgIcon icon="lucide:languages" />
+    </NIcon>
   </n-popselect>
 </template>

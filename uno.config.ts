@@ -8,9 +8,6 @@ import {
 } from 'unocss'
 
 export default defineConfig({
-  shortcuts: {
-    'text-foreground-muted': 'text-[var(--n-text-color)]',
-  },
   presets: [
     presetWind3(),
     presetIcons({

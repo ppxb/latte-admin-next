@@ -101,7 +101,7 @@ onMounted(getCaptcha)
     <div class="text-4xl font-bold ">
       欢迎回来 👏
     </div>
-    <div class="text-base text-foreground-muted mb-8">
+    <div class="text-base mb-8">
       请输入您的账户信息以登录系统进行管理
     </div>
     <div class="flex flex-col gap-2">
@@ -152,7 +152,7 @@ onMounted(getCaptcha)
         </n-button>
       </n-form>
       <div class="flex flex-col">
-        <n-divider class="text-foreground-muted text-sm">
+        <n-divider class="text-sm">
           其他登录方式
         </n-divider>
         <div class="w-full flex flex-col gap-4">

@@ -1,5 +1,6 @@
 import type { Component } from 'vue'
 import * as carbon from '@vicons/carbon'
+import { klona as jsonClone } from 'klona/json'
 import { NIcon } from 'naive-ui'
 import { browse } from 'xe-utils'
 
@@ -32,4 +33,8 @@ export function renderIcon(name: string = '') {
       return () => h(NIcon, null, { default: () => h(icon[0][1] as unknown as Component) })
     }
   }
+}
+
+export {
+  jsonClone,
 }

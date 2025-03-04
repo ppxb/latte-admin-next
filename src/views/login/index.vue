@@ -27,7 +27,7 @@ const loginComponents = {
         <img :src="appStore.getLogo() || '/logo.svg'" alt="logo" class="block max-h-10 my-8 self-start">
         <component :is="loginComponents[appStore.loginType]" />
       </div>
-      <footer class="absolute bottom-6 text-foreground-muted">
+      <footer class="absolute bottom-6">
         {{ appStore.getCopyright() }}{{ appStore.getForRecord() ? ` · ${appStore.getForRecord()}` : '' }}
       </footer>
     </div>

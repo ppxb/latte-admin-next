@@ -9,9 +9,7 @@ const { isFullscreen, toggle } = useFullscreen()
 </script>
 
 <template>
-  <div
-    class="hidden lg:block text-5 cursor-pointer text-[var(--text-color)]"
-    :class="!isFullscreen ? 'i-lucide:maximize' : 'i-lucide:minimize'"
-    @click="toggle"
-  />
+  <n-icon :size="19" class="hidden lg:block cursor-pointer" @click="toggle">
+    <SvgIcon :icon="!isFullscreen ? 'lucide:maximize' : 'lucide:minimize'" />
+  </n-icon>
 </template>

@@ -56,11 +56,7 @@ function handleToggleTheme(event?: MouseEvent) {
 </script>
 
 <template>
-  <div
-    class="text-5 cursor-pointer text-[var(--text-color)]"
-    :class="[
-      appStore.theme === 'light' ? 'i-lucide:moon' : 'i-lucide:sun',
-    ]"
-    @click="handleToggleTheme"
-  />
+  <n-icon :size="19" class="cursor-pointer" @click="handleToggleTheme">
+    <SvgIcon :icon="appStore.theme === 'light' ? 'lucide:moon' : 'lucide:sun'" />
+  </n-icon>
 </template>

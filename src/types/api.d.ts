@@ -1,11 +1,64 @@
 declare namespace Api{
+  namespace Common{
+    interface PaginatingCommonParams{
+      page: number
+      size: number
+      total: number
+    }
+
+    interface PaginatingQueryRecord<T = any> extends PaginatingCommonParams{
+      list: T[]
+    }
+
+    type CommonSearchParams = Pick<Common.PaginatingCommonParams, 'page' | 'size'>
+
+    /** 状态（0：禁用；1：启用；） */
+    type EnableStatus = 0 | 1
+
+    type CommonRecord<T = any> = {
+      id: string
+      createTime: string
+      createUserString: string
+      status: EnableStatus | null
+    } & T
+  }
+
+  type User = Common.CommonRecord<{
+    username: string
+    nickname: string
+    avatar: string
+    gender: number
+    email: string
+    phone: string
+    description: string
+    isSystem?: boolean
+    updateUserString: string
+    updateTime: string
+    deptId: string
+    deptName: string
+    roleIds: Array<number>
+    roleNames: Array<string>
+    disabled: boolean
+  }>
+
+  type UserSearchParams = RecordNullable<
+    Pick<Api.User, 'description' | 'status' | 'createTime' | 'deptId'>
+    & Common.CommonSearchParams
+    & {
+      sort: string[]
+      userIds?: string[]
+    }
+  >
+
+  type UserList = Common.PaginatingQueryRecord<User>
+
   /** 性别（0：未知；1：男；2：女；） */
   type GenderType = 0 | 1 | 2
 
-  /** 状态（0：禁用；1：启用；） */
-  type StatusType = 0 | 1
+  /** 状态（1：启用；2：禁用；） */
+  type StatusType = 1 | 2
 
-  interface Res<T> {
+  interface Res<T = unknown> {
     code: number
     data: T
     msg: string
@@ -128,4 +181,38 @@ declare namespace Api{
     showInTabs: boolean
     affix: boolean
   }
+
+  interface UserQuery {
+    description?: string
+    status?: number
+    createTime?: Array<string>
+    deptId?: string
+    sort: Array<string>
+    userIds?: Array<string>
+  }
+
+  interface UserPageQuery extends UserQuery, PageQuery {}
+
+  export interface User {
+    id: string
+    username: string
+    nickname: string
+    avatar: string
+    gender: number
+    email: string
+    phone: string
+    description: string
+    status: 1 | 2
+    isSystem?: boolean
+    createUserString: string
+    createTime: string
+    updateUserString: string
+    updateTime: string
+    deptId: string
+    deptName: string
+    roleIds: Array<number>
+    roleNames: Array<string>
+    disabled: boolean
+  }
+
 }

@@ -19,6 +19,10 @@ declare global{
   }
 
   type Recordable<T = any> = Record<string, T>
+
+  type RecordNullable<T = any> = {
+    [K in keyof T]?: T[K] | null
+  }
 }
 
 export {}
