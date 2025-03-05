@@ -85,4 +85,4 @@ function themeStore() {
   }
 }
 
-export const useThemeStore = defineStore('theme', themeStore, { persist: true })
+export const useThemeStore = defineStore('theme', themeStore)

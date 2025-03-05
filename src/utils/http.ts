@@ -8,6 +8,7 @@ import type {
 import axios from 'axios'
 import qs from 'query-string'
 
+import router from '~/router'
 import { useUserStore } from '~/store'
 import { getToken } from '~/utils/auth'
 
@@ -75,9 +76,9 @@ http.interceptors.response.use(
         closeOnEsc: false,
         positiveText: '重新登录',
         onPositiveClick: () => {
-          // const userStore = useUserStore()
-          // userStore.logoutCallBack()
-          // router.replace('/login')
+          const userStore = useUserStore()
+          userStore.logoutCallBack()
+          router.replace('/login')
         },
 
       })

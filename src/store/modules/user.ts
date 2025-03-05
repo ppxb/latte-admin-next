@@ -138,4 +138,4 @@ function userStore() {
   }
 }
 
-export const useUserStore = defineStore('user', userStore, { persist: true })
+export const useUserStore = defineStore('user', userStore)

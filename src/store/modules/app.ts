@@ -1,6 +1,7 @@
 import { defineStore } from 'pinia'
 
 import { listSiteOptionDict } from '~/apis'
+import { localStg } from '~/utils/storage'
 
 const defaultSettings = {
   theme: 'light',
@@ -19,6 +20,8 @@ const defaultSettings = {
 } as App.Settings
 
 function appStore() {
+  const locale = ref<I18n.LangType>(localStg.get('lang') || 'zh-CN')
+
   const loginType = ref<App.LoginType>('account')
   const siteConfig = ref<App.SiteConfig>()
   const settings = reactive<App.Settings>(defaultSettings)
@@ -83,6 +86,7 @@ function appStore() {
 
   return {
     loginType,
+    locale,
     ...toRefs(settings),
     siteConfig,
     transitionName,
@@ -97,4 +101,4 @@ function appStore() {
   }
 }
 
-export const useAppStore = defineStore('app', appStore, { persist: true })
+export const useAppStore = defineStore('app', appStore)

@@ -8,6 +8,7 @@ import { useTable, useTableOperate } from '~/hooks/use-table'
 
 import UserOperateDrawer from './components/UserOperateDrawer.vue'
 import UserSearch from './components/UserSearch.vue'
+import { isMobile } from '~/utils'
 
 const {
   columns,

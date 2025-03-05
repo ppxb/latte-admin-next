@@ -91,4 +91,4 @@ function routeStore() {
   }
 }
 
-export const useRouteStore = defineStore('route', routeStore, { persist: true })
+export const useRouteStore = defineStore('route', routeStore)

@@ -10,5 +10,6 @@ export default antfu({
     'style/arrow-parens': 'off',
     'style/space-before-blocks': 'off',
     'ts/no-use-before-define': 'off',
+    'ts/consistent-type-definitions': 'off',
   },
 })
