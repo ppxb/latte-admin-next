@@ -12,14 +12,16 @@ declare namespace Api{
 
     type CommonSearchParams = Pick<Common.PaginatingCommonParams, 'page' | 'size'>
 
-    /** 状态（0：禁用；1：启用；） */
-    type EnableStatus = 0 | 1
+    /** 状态（1：启用；2：禁用；） */
+    type EnableStatus = 1 | 2
+
+    type CommonId = number | string
 
     type CommonRecord<T = any> = {
-      id: string
+      id: CommonId
       createTime: string
       createUserString: string
-      status: EnableStatus | null
+      status: EnableStatus
     } & T
   }
 
@@ -36,8 +38,8 @@ declare namespace Api{
     updateTime: string
     deptId: string
     deptName: string
-    roleIds: Array<number>
-    roleNames: Array<string>
+    roleIds: number[]
+    roleNames: string[]
     disabled: boolean
   }>
 
@@ -51,6 +53,9 @@ declare namespace Api{
   >
 
   type UserList = Common.PaginatingQueryRecord<User>
+
+  /** 性别（0：未知；1：男；2：女；） */
+  type UserGender = 0 | 1 | 2
 
   /** 性别（0：未知；1：男；2：女；） */
   type GenderType = 0 | 1 | 2

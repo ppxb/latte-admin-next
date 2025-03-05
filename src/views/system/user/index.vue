@@ -3,9 +3,11 @@ import { NButton, NIcon, NPopconfirm, NTag } from 'naive-ui'
 
 import { fetchGetUserList } from '~/apis/system'
 import SvgIcon from '~/components/common/svg-icon.vue'
+import TagGroup from '~/components/TagGroup.vue'
 import { useTable, useTableOperate } from '~/hooks/use-table'
 
-import UserSearch from './components/user-search.vue'
+import UserOperateDrawer from './components/UserOperateDrawer.vue'
+import UserSearch from './components/UserSearch.vue'
 
 const {
   columns,
@@ -31,38 +33,37 @@ const {
       type: 'selection',
       align: 'center',
       width: 48,
+      fixed: 'left',
     },
     {
       key: 'index',
       title: '序号',
-      align: 'center',
       width: 64,
+      fixed: 'left',
+      align: 'center',
     },
     {
       key: 'nickname',
       title: '昵称',
+      minWidth: 140,
       align: 'center',
-      minWidth: 100,
+      fixed: 'left',
     },
     {
       key: 'username',
       title: '用户名',
       align: 'center',
-      minWidth: 100,
+      minWidth: 140,
     },
     {
       key: 'status',
       title: '状态',
       align: 'center',
-      width: 100,
+      minWidth: 140,
       render: row => {
-        if (row.status === null){
-          return null
-        }
-
         const tagMap: Record<Api.Common.EnableStatus, NaiveUI.ThemeColor> = {
-          0: 'warning',
           1: 'success',
+          2: 'warning',
         }
 
         const label = row.status === 1 ? '启用' : '禁用'
@@ -71,7 +72,7 @@ const {
           <NTag
             round
             bordered={false}
-            type={tagMap[row.status as Api.Common.EnableStatus]}
+            type={tagMap[row.status]}
             v-slots={{
               icon: () => (
                 <NIcon size={16}>
@@ -89,39 +90,49 @@ const {
       key: 'deptName',
       title: '所属部门',
       align: 'center',
+      minWidth: 180,
+    },
+    {
+      key: 'roleNames',
+      title: '角色',
       minWidth: 120,
+      align: 'center',
+      render: row => (
+        <TagGroup tags={row.roleNames} />
+      ),
     },
     {
       key: 'phone',
       title: '手机号',
       align: 'center',
-      width: 120,
+      minWidth: 170,
     },
     {
       key: 'email',
       title: '邮箱',
       align: 'center',
-      width: 200,
+      minWidth: 170,
     },
     {
       key: 'description',
       title: '描述',
       align: 'center',
-      minWidth: 100,
+      minWidth: 130,
     },
     {
       key: 'createTime',
       title: '创建时间',
       align: 'center',
-      minWidth: 200,
+      width: 200,
     },
     {
       key: 'operate',
       title: '操作',
       align: 'center',
-      width: 130,
+      width: 160,
+      fixed: 'right',
       render: row => (
-        <div class="flex items-center gap-2">
+        <div class="flex items-center justify-center gap-2">
           <NButton type="primary" ghost size="small" onClick={() => edit(row.id)}>
             编辑
           </NButton>
@@ -153,17 +164,14 @@ const {
 } = useTableOperate(data, getData)
 
 async function handleBatchDelete() {
-  console.log(checkedRowKeys.value)
-
   onBatchDeleted()
 }
 
-function handleDelete(id: number) {
-  console.log(id)
+function handleDelete(id: Api.Common.CommonId) {
   onDeleted()
 }
 
-function edit(id: number) {
+function edit(id: Api.Common.CommonId) {
   handleEdit(id)
 }
 
@@ -177,17 +185,33 @@ function resetSearch() {
   <div class="min-h-500px flex flex-col items-stretch gap-4 overflow-hidden lt-sm:overflow-auto">
     <UserSearch v-model:model="searchParams" @reset="resetSearch" @search="getDataByPage" />
     <NCard title="用户管理" :bordered="false" size="small" class="sm:(flex-1 overflow-hidden) rounded-2">
+      <template #header-extra>
+        <TableHeaderOperation
+          v-model:columns="columnChecks"
+          :disabled-delete="checkedRowKeys.length === 0"
+          :loading="loading"
+          @add="handleAdd"
+          @delete="handleBatchDelete"
+          @refresh="getData"
+        />
+      </template>
       <NDataTable
         v-model:checked-row-keys="checkedRowKeys"
         :columns="columns"
         :data="data"
-        :scroll-x="962"
+        :scroll-x="1800"
         :loading="loading"
         :row-key="row => row.id"
         :pagination="mobilePagination"
         size="small"
         remote
         class="sm:h-full"
+      />
+      <UserOperateDrawer
+        v-model:visible="drawerVisible"
+        :operate-type="operateType"
+        :row-data="editingData"
+        @submitted="getDataByPage"
       />
     </NCard>
   </div>

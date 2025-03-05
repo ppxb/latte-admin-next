@@ -11,3 +11,10 @@ export function transformPathToName(path: string) {
   }
   return upperFirst(camelCase(path))
 }
+
+export function transformRecordToOption<T extends Record<string, string>>(record: T) {
+  return Object.entries(record).map(([value, label]) => ({
+    value,
+    label,
+  })) as Option<keyof T>[]
+}
