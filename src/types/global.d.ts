@@ -11,6 +11,8 @@ declare global{
     }
   }
 
+  export const BUILD_TIME: string
+
   interface Window {
     $loadingBar?: import('naive-ui').LoadingBarProviderInst
     $dialog?: import('naive-ui').DialogProviderInst

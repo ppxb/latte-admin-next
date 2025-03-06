@@ -33,7 +33,7 @@ function renderLabel(option: SelectOption) {
       <NIcon size={14}>
         <SvgIcon icon={icon} />
       </NIcon>
-      <span>{option.label}</span>
+      <span class="leading-none">{option.label}</span>
     </div>
   )
 }

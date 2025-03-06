@@ -1,13 +1,16 @@
 import { fileURLToPath, URL } from 'node:url'
 import { defineConfig, loadEnv } from 'vite'
 
+import { getBuildTime } from './build/config'
 import createVitePlugins from './plugins'
 
 export default defineConfig(({ mode }) => {
-  const env = loadEnv(mode, process.cwd()) as ImportMetaEnv
+  const viteEnv = loadEnv(mode, process.cwd()) as ImportMetaEnv
+
+  const buildTime = getBuildTime()
 
   return {
-    base: env.VITE_BASE,
+    base: viteEnv.VITE_BASE,
     resolve: {
       alias: {
         '~': fileURLToPath(new URL('./src', import.meta.url)),
@@ -17,7 +20,7 @@ export default defineConfig(({ mode }) => {
     server: {
       proxy: {
         '/api': {
-          target: env.VITE_API_BASE_URL,
+          target: viteEnv.VITE_API_BASE_URL,
           changeOrigin: true,
           secure: false,
           rewrite: path => path.replace(/^\/api/, ''),
@@ -45,6 +48,9 @@ export default defineConfig(({ mode }) => {
           assetFileNames: 'static/[ext]/[name]-[hash].[ext]',
         },
       },
+    },
+    define: {
+      BUILD_TIME: JSON.stringify(buildTime),
     },
   }
 })
