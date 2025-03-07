@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import ToggleTheme from '~/components/common/toggle-theme.vue'
-import { useAppStore } from '~/store'
+import { useAppStore, useThemeStore } from '~/store'
 
 import Fullscreen from './components/fullscreen.vue'
 import Search from './components/search.vue'
@@ -11,6 +11,7 @@ defineOptions({
 })
 
 const appStore = useAppStore()
+const themeStore = useThemeStore()
 
 function handleMenuCollapse() {
   appStore.menuCollapse = !appStore.menuCollapse
@@ -28,6 +29,11 @@ function handleMenuCollapse() {
       <Search />
       <ToggleLanguage />
       <Fullscreen />
+      <ThemeSchemeSwitch
+        :theme-scheme="themeStore.themeScheme"
+        :is-dark="themeStore.darkMode"
+        @switch="themeStore.toggleThemeScheme"
+      />
       <ToggleTheme />
       <UserDropdown />
     </div>

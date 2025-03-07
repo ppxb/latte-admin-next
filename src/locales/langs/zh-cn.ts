@@ -6,6 +6,10 @@ const local: I18n.Schema = {
     updateConfirm: '立即刷新',
     updateCancel: '稍后再说',
   },
+  icon: {
+    themeConfig: '主题配置',
+    themeScheme: '主题模式',
+  },
 }
 
 export default local

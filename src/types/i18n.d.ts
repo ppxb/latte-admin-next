@@ -9,6 +9,15 @@ declare namespace I18n{
       updateConfirm: string
       updateCancel: string
     }
+    icon: {
+      themeConfig: string
+      themeScheme: string
+      lang: string
+      fullscreen: string
+      fullsceenExit: string
+      reload: string
+      collapse: string
+    }
   }
 
   type GetI18nKey<T extends Record<string, unknown>, K extends keyof T = keyof T> = K extends string

@@ -9,6 +9,8 @@ export {}
 declare module 'vue' {
   export interface GlobalComponents {
     AppProvider: typeof import('./../components/common/AppProvider.vue')['default']
+    BaseLayout: typeof import('./../components/BaseLayout/index.vue')['default']
+    LayoutContainer: typeof import('./../components/common/LayoutContainer.vue')['default']
     NButton: typeof import('naive-ui')['NButton']
     NCard: typeof import('naive-ui')['NCard']
     NCheckbox: typeof import('naive-ui')['NCheckbox']
@@ -47,12 +49,14 @@ declare module 'vue' {
     NSpace: typeof import('naive-ui')['NSpace']
     NSwitch: typeof import('naive-ui')['NSwitch']
     NTag: typeof import('naive-ui')['NTag']
+    NTooltip: typeof import('naive-ui')['NTooltip']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
     SvgIcon: typeof import('./../components/common/svg-icon.vue')['default']
     TableColumnSetting: typeof import('./../components/TableColumnSetting.vue')['default']
     TableHeaderOperation: typeof import('./../components/TableHeaderOperation.vue')['default']
     TagGroup: typeof import('./../components/TagGroup.vue')['default']
+    ThemeSchemeSwitch: typeof import('./../components/common/ThemeSchemeSwitch.vue')['default']
     ToggleLanguage: typeof import('./../components/common/toggle-language.vue')['default']
     ToggleTheme: typeof import('./../components/common/toggle-theme.vue')['default']
   }

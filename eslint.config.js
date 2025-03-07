@@ -11,5 +11,6 @@ export default antfu({
     'style/space-before-blocks': 'off',
     'ts/no-use-before-define': 'off',
     'ts/consistent-type-definitions': 'off',
+    "prefer-const": "error"
   },
 })

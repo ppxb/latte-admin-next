@@ -6,6 +6,10 @@ const local: I18n.Schema = {
     updateConfirm: 'Refresh immediately',
     updateCancel: 'Later',
   },
+  icon: {
+    themeConfig: 'Theme Configuration',
+    themeScheme: 'Theme Scheme',
+  },
 }
 
 export default local
